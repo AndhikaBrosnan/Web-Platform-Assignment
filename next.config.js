@@ -1,11 +1,12 @@
-const withPWA = require('next-pwa')
+const withPWA = require("next-pwa");
 
 module.exports = withPWA({
   pwa: {
+    skipWaiting: true,
+    // dest: ".next/pwa",
     // pwa output folder
-    // dest: '.next/pwa'
-    // 
+    //
     // Other configurations:
     // ...
-  }
-})
+  },
+});

@@ -10,10 +10,12 @@
     "start": "cross-env NODE_ENV=production node ./index.js"
   },
   "dependencies": {
+    "@apollo/client": "^3.6.6",
     "@emotion/css": "^11.9.0",
     "cross-env": "^7.0.3",
     "fastify": "^3.29.0",
     "fastify-compress": "^4.1.0",
+    "graphql": "^16.5.0",
     "next": "^12.1.6",
     "next-pwa": "latest",
     "react": "^18.1.0",
