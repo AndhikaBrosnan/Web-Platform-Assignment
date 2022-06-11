@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { css, cx } from "@emotion/css";
 import { useRouter } from "next/router";
 import Head from "next/head";
@@ -8,7 +8,37 @@ const AnimeDetailPage = () => {
   const { asPath } = useRouter();
   const pathnameDetail = asPath.slice(1);
 
+  const [animeCollections, setAnimeCollections] = useState([]);
+
+  let storageAnimeCollection;
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      storageAnimeCollection = JSON.parse(
+        localStorage.getItem("animeCollections")
+      );
+
+      if (storageAnimeCollection) {
+        setAnimeCollections(storageAnimeCollection);
+      }
+    }
+  }, []);
+
   const animeDetail = useAnimeDetailQuery(parseInt(pathnameDetail));
+
+  const onHandleAddToCollection = () => {
+    const collectionsObj = {
+      coverImage: animeDetail.coverImage,
+      title: animeDetail.title,
+    };
+
+    setAnimeCollections([collectionsObj, ...animeCollections]);
+  };
+
+  console.log("[animeCollections]", animeCollections);
+
+  useEffect(() => {
+    localStorage.setItem("animeCollections", JSON.stringify(animeCollections));
+  }, [animeCollections]);
 
   return (
     <>
@@ -29,15 +59,16 @@ const AnimeDetailPage = () => {
           src={animeDetail.bannerImage}
           alt="Banner Image"
         />
-        <p
+        <div
           className={css`
             margin: 1em;
           `}
-        >
-          {animeDetail.description}
-        </p>
+          dangerouslySetInnerHTML={{ __html: animeDetail.description }}
+        />
 
-        <button className="ui primary button">Add to Collection</button>
+        <button onClick={onHandleAddToCollection} className="ui primary button">
+          Add to Collection
+        </button>
       </div>
     </>
   );
