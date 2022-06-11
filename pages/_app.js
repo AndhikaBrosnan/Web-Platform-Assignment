@@ -2,7 +2,7 @@
 
 import { ApolloProvider } from "@apollo/client";
 import client from "../api/apollo-client";
-import CommonLayout from "../component/common-layout";
+import CommonLayout from "../component/commonLayout";
 
 function MyApp({ Component, pageProps }) {
   return (

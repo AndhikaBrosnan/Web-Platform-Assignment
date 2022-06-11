@@ -14,7 +14,6 @@ const CollectionList = () => {
 
   const [animeCollections, setAnimeCollections] = useState([]);
 
-  console.log("[localAnimeStorage]", localAnimeStorage);
   return (
     <div
       className={css`

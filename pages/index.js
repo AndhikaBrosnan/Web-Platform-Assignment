@@ -3,12 +3,16 @@ import { useEffect, useState } from "react";
 import { useAnimeListQuery } from "../hooks/useAnimeListQuery";
 import { css, cx } from "@emotion/css";
 import { useRouter } from "next/router";
+import PaginationComponent from "../component/paginationComponent";
 
 const LandingPage = () => {
-  const mediaList = useAnimeListQuery();
   const router = useRouter();
 
   const [animeList, setAnimeList] = useState([]);
+  const [page, setPage] = useState(1);
+  const [perPage, setPerPage] = useState(10);
+
+  const mediaList = useAnimeListQuery(page, perPage);
 
   useEffect(() => {
     if (mediaList) {
@@ -18,6 +22,10 @@ const LandingPage = () => {
 
   const onHandleItemClick = (id) => {
     router.push(`/${id}`);
+  };
+
+  const onHandleChangePage = (value) => {
+    setPage(value);
   };
 
   return (
@@ -76,6 +84,10 @@ const LandingPage = () => {
               </div>
             );
           })}
+          <PaginationComponent
+            page={page}
+            onHandleChangePage={onHandleChangePage}
+          />
         </div>
       </div>
     </>
