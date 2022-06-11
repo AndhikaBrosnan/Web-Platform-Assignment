@@ -7,8 +7,6 @@ const useAnimeDetailQuery = (id) => {
 
   const { data } = useQuery(QUERY, { variables });
 
-  console.log("[data]", data);
-
   if (data) {
     return data?.Media;
   }
