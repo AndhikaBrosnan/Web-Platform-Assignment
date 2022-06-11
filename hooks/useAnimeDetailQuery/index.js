@@ -1,15 +1,18 @@
 import { useQuery, QUERY } from "./animeDetail.graphql";
 
-const useAnimeListQuery = () => {
-  var variables = {
-    id: 15125,
+const useAnimeDetailQuery = (id) => {
+  let variables = {
+    id,
   };
 
-  const { data } = useQuery(QUERY, variables);
+  const { data } = useQuery(QUERY, { variables });
+
+  console.log("[data]", data);
+
   if (data) {
-    return data;
+    return data?.Media;
   }
   return {};
 };
 
-export { useAnimeListQuery };
+export { useAnimeDetailQuery };

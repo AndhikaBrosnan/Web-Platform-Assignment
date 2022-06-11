@@ -10,13 +10,17 @@ const QUERY = gql`
       media(search: $search, type: ANIME, sort: FAVOURITES_DESC) {
         id
         bannerImage
+        coverImage {
+          extraLarge
+          large
+          medium
+          color
+        }
         title {
           romaji
           english
           native
         }
-        type
-        genres
       }
     }
   }
