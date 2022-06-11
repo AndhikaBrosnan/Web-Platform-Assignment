@@ -25,29 +25,58 @@ const LandingPage = () => {
       <Head>
         <title>Anime List</title>
       </Head>
-
-      <h1>Anime List</h1>
       <div
         className={css`
-          display: grid;
-          grid-template-columns: auto auto auto auto;
-          grid-gap: 1em;
+          margin-top: 2em;
         `}
       >
-        {animeList.map((item, i) => {
-          return (
-            <div
-              key={i}
-              className={css`
-                cursor: pointer;
-              `}
-              onClick={() => onHandleItemClick(item.id)}
-            >
-              <img src={item.coverImage.large} alt="Cover Image" />
-              <p>{item.title?.romaji}</p>
-            </div>
-          );
-        })}
+        <h1>LIST OF ANIMES</h1>
+        <div
+          className={css`
+            margin: 3em 18%;
+            display: grid;
+            grid-template-columns: auto auto auto auto auto;
+            grid-gap: 1em;
+            @media (max-width: 768px) {
+              grid-template-columns: auto auto;
+              margin: 1em 0;
+            }
+          `}
+        >
+          {animeList.map((item, i) => {
+            return (
+              <div
+                key={i}
+                className={css`
+                  display: flex;
+                  flex-direction: column;
+                  justify-content: center;
+                  align-items: center;
+                  cursor: pointer;
+                  border-radius: 8px;
+                  border-style: solid;
+                  border-width: 0.5px;
+                `}
+                onClick={() => onHandleItemClick(item.id)}
+              >
+                <img
+                  className={css`
+                    object-fit: cover;
+                  `}
+                  src={item.coverImage.large}
+                  alt="Cover Image"
+                />
+                <p
+                  className={css`
+                    margin-top: 1em;
+                  `}
+                >
+                  {item.title?.romaji}
+                </p>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </>
   );

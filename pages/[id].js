@@ -15,7 +15,12 @@ const AnimeDetailPage = () => {
       <Head>
         <title>Anime Detail</title>
       </Head>
-      <div>
+      <div
+        className={css`
+          margin: 1em 0;
+          text-align: center;
+        `}
+      >
         <h1>{animeDetail?.title?.romaji}</h1>
         <img
           className={css`
@@ -24,7 +29,15 @@ const AnimeDetailPage = () => {
           src={animeDetail.bannerImage}
           alt="Banner Image"
         />
-        <p>{animeDetail.description}</p>
+        <p
+          className={css`
+            margin: 1em;
+          `}
+        >
+          {animeDetail.description}
+        </p>
+
+        <button className="ui primary button">Add to Collection</button>
       </div>
     </>
   );
