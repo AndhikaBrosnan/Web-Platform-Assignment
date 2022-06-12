@@ -49,6 +49,9 @@ const AnimeDetailPage = () => {
     localStorage.setItem("animeCollections", JSON.stringify(animeCollections));
   }, [animeCollections]);
 
+  const isAlreadyExist =
+    animeCollections.filter((item) => item.id === animeDetail.id).length > 0;
+
   return (
     <div
       className={css`
@@ -74,7 +77,10 @@ const AnimeDetailPage = () => {
         dangerouslySetInnerHTML={{ __html: animeDetail.description }}
       />
 
-      <button onClick={onHandleAddToCollection} className="ui primary button">
+      <button
+        onClick={onHandleAddToCollection}
+        className={`ui primary button ${isAlreadyExist && `disabled`}`}
+      >
         Add to Collection
       </button>
 
