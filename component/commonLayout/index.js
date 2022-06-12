@@ -2,7 +2,14 @@ import { css, cx } from "@emotion/css";
 
 const CommonLayout = ({ children }) => {
   return (
-    <div>
+    <div
+      className={css`
+        height: 100vh;
+        width: 100%;
+        margin-right: auto;
+        margin-left: auto;
+      `}
+    >
       <div
         className={css`
           height: 3em;

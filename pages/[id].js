@@ -9,6 +9,7 @@ const AnimeDetailPage = () => {
   const pathnameDetail = asPath.slice(1);
 
   const [animeCollections, setAnimeCollections] = useState([]);
+  const [ack, setAck] = useState(false);
 
   let storageAnimeCollection;
   useEffect(() => {
@@ -23,54 +24,70 @@ const AnimeDetailPage = () => {
     }
   }, []);
 
+  useEffect(() => {
+    if (ack === true) {
+      setTimeout(function () {
+        setAck(false);
+      }, 2000);
+    }
+  }, [ack]);
+
   const animeDetail = useAnimeDetailQuery(parseInt(pathnameDetail));
 
   const onHandleAddToCollection = () => {
     const collectionsObj = {
+      id: animeDetail.id,
       coverImage: animeDetail.coverImage,
       title: animeDetail.title,
     };
 
     setAnimeCollections([collectionsObj, ...animeCollections]);
+    setAck(true);
   };
-
-  console.log("[animeCollections]", animeCollections);
 
   useEffect(() => {
     localStorage.setItem("animeCollections", JSON.stringify(animeCollections));
   }, [animeCollections]);
 
   return (
-    <>
+    <div
+      className={css`
+        margin: 1em 0;
+        text-align: center;
+      `}
+    >
       <Head>
         <title>Anime Detail</title>
       </Head>
+      <h1>{animeDetail?.title?.romaji}</h1>
+      <img
+        className={css`
+          width: 100%;
+        `}
+        src={animeDetail.bannerImage}
+        alt="Banner Image"
+      />
       <div
         className={css`
-          margin: 1em 0;
-          text-align: center;
+          margin: 1em;
         `}
-      >
-        <h1>{animeDetail?.title?.romaji}</h1>
-        <img
-          className={css`
-            width: 100%;
-          `}
-          src={animeDetail.bannerImage}
-          alt="Banner Image"
-        />
-        <div
-          className={css`
-            margin: 1em;
-          `}
-          dangerouslySetInnerHTML={{ __html: animeDetail.description }}
-        />
+        dangerouslySetInnerHTML={{ __html: animeDetail.description }}
+      />
 
-        <button onClick={onHandleAddToCollection} className="ui primary button">
-          Add to Collection
-        </button>
-      </div>
-    </>
+      <button onClick={onHandleAddToCollection} className="ui primary button">
+        Add to Collection
+      </button>
+
+      {/* Ack */}
+      {ack && (
+        <div className="ui positive message">
+          <div className="header">Success!</div>
+          <p>
+            Anime <b>{animeDetail?.title?.romaji} added to collections.</b>
+          </p>
+        </div>
+      )}
+    </div>
   );
 };
 

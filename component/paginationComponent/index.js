@@ -28,6 +28,7 @@ const PaginationComponent = ({ page, onHandleChangePage }) => {
       <Button>&laquo;</Button>
       {[1, 2, 3].map((item) => (
         <Button
+          key={item}
           className={page === item && activeButton}
           onClick={() => onHandleChangePage(item)}
         >
