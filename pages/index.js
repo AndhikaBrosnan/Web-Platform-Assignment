@@ -4,6 +4,7 @@ import { useAnimeListQuery } from "../hooks/useAnimeListQuery";
 import { css, cx } from "@emotion/css";
 import { useRouter } from "next/router";
 import PaginationComponent from "../component/paginationComponent";
+import { Heading, Box } from "@chakra-ui/react";
 
 const LandingPage = () => {
   const router = useRouter();
@@ -37,8 +38,10 @@ const LandingPage = () => {
       <Head>
         <title>Anime List</title>
       </Head>
-      <h1>LIST OF ANIMES</h1>
-      <div
+      <Heading as="h1" size="lg">
+        LIST OF ANIMES
+      </Heading>
+      <Box
         className={css`
           margin: 3em 18%;
           display: grid;
@@ -46,7 +49,7 @@ const LandingPage = () => {
           grid-gap: 1em;
           @media (max-width: 768px) {
             grid-template-columns: auto auto;
-            margin: 1em 0;
+            margin: 1em 0.5em;
           }
         `}
       >
@@ -87,7 +90,7 @@ const LandingPage = () => {
           page={page}
           onHandleChangePage={onHandleChangePage}
         />
-      </div>
+      </Box>
     </div>
   );
 };

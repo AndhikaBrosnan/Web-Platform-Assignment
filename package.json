@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.6.6",
+    "@chakra-ui/react": "^2.2.1",
     "@emotion/css": "^11.9.0",
     "@emotion/react": "11",
     "@emotion/styled": "11",
@@ -22,6 +23,8 @@
     "next": "^12.1.6",
     "next-pwa": "latest",
     "react": "^18.1.0",
-    "react-dom": "^18.1.0"
+    "react-dom": "^18.1.0",
+    "react-redux": "^7.2.5",
+    "redux-thunk": "^2.3.0"
   }
 }
