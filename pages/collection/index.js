@@ -16,9 +16,12 @@ import {
   useToast,
   Box,
   Link,
+  Image,
+  IconButton,
 } from "@chakra-ui/react";
 import MultiSelectAnime from "../../component/multiSelectAnime";
 import { useSelector } from "react-redux";
+import { EditIcon } from "@chakra-ui/icons";
 
 const CollectionList = () => {
   const router = useRouter();
@@ -30,9 +33,13 @@ const CollectionList = () => {
 
   const selectedAnime = useSelector(({ anime }) => anime);
 
-  const onHandleItemClick = (id) => {
+  const onHandleEditClick = (id) => {
     router.push(`/collection?id=${id}`);
     onOpen();
+  };
+
+  const onHandleItemClick = (id) => {
+    router.push(`/collection/${id}`);
   };
 
   const onHandleDelete = (deletedId) => {
@@ -203,18 +210,21 @@ const CollectionList = () => {
             `}
           >
             {animeCollections?.map((item, i) => {
+              const firstItem = JSON.parse(localStorage.getItem(item))
+                .selectedAnimes[0];
               return (
                 <Box
+                  key={i}
                   className={css`
                     position: relative;
                     cursor: pointer;
                     border-radius: 8px;
                     border-style: solid;
                     border-width: 0.5px;
-                    height: 3.5em;
+                    height: 13em;
                   `}
                 >
-                  <div
+                  <Box
                     className={css`
                       position: absolute;
                       top: 4px;
@@ -222,24 +232,44 @@ const CollectionList = () => {
                       z-index: 10;
                     `}
                   >
-                    <Button
-                      size="xs"
-                      colorScheme="red"
-                      onClick={() => onHandleDelete(item)}
+                    <Box
+                      className={css`
+                        position: relative;
+                      `}
                     >
-                      X
-                    </Button>
-                  </div>
-                  <div
+                      <IconButton
+                        onClick={() => onHandleEditClick(item)}
+                        p={1}
+                        size="xs"
+                        colorScheme="yellow"
+                        aria-label="Search database"
+                        icon={<EditIcon />}
+                      />
+                      <Button
+                        p={1}
+                        size="xs"
+                        colorScheme="red"
+                        onClick={() => onHandleDelete(item)}
+                      >
+                        X
+                      </Button>
+                    </Box>
+                  </Box>
+                  <Box
                     key={i}
                     className={css`
                       display: flex;
                       flex-direction: column;
                       justify-content: center;
                       align-items: center;
+                      height: fit-content;
                     `}
                     onClick={() => onHandleItemClick(item)}
                   >
+                    <Image
+                      fallbackSrc="https://via.placeholder.com/150"
+                      src={firstItem.coverImage.medium}
+                    />
                     <p
                       className={css`
                         margin-top: 1em;
@@ -247,7 +277,7 @@ const CollectionList = () => {
                     >
                       {item}
                     </p>
-                  </div>
+                  </Box>
                 </Box>
               );
             })}
