@@ -59,12 +59,6 @@ const AnimeDetailPage = () => {
 
   const onHandleAddToCollection = () => {
     onOpen();
-    const collectionsObj = {
-      id: animeDetail.id,
-      coverImage: animeDetail.coverImage,
-      bannerImage: animeDetail.bannerImage,
-      title: animeDetail.title,
-    };
   };
 
   const onHandleItemClick = (item) => {

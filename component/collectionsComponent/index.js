@@ -41,13 +41,15 @@ const CollectionsComponent = ({ onOpen, onHandleItemClick }) => {
             `}
           >
             You don't have anime collections yet. Add it{" "}
-            <Link href="/">here</Link>
+            <Link color="blue" href="/collection">
+              here
+            </Link>
           </div>
         )}
 
         <Box
           className={css`
-            margin: 3em 18%;
+            margin: 2em 10%;
             display: grid;
             grid-template-columns: auto auto auto auto auto;
             grid-gap: 1em;
@@ -65,7 +67,7 @@ const CollectionsComponent = ({ onOpen, onHandleItemClick }) => {
                   cursor: pointer;
                   border-radius: 8px;
                   border-style: solid;
-                  border-width: 0.5px;
+                  border-width: 1px;
                   height: 3.5em;
                 `}
               >
