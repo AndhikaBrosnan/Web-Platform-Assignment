@@ -42,13 +42,13 @@ const AnimeDetailPage = () => {
   useEffect(() => {
     if (ack === true) {
       setTimeout(function () {
-        toast({
-          title: "Success.",
-          description: `Anime ${animeDetail?.title?.romaji} added to Collection`,
-          status: "success",
-          duration: 2000,
-          isClosable: true,
-        });
+        // toast({
+        //   title: "Success.",
+        //   description: `Anime ${animeDetail?.title?.romaji} added to Collection`,
+        //   status: "success",
+        //   duration: 2000,
+        //   isClosable: true,
+        // });
 
         setAck(false);
       }, 2000);
@@ -65,9 +65,6 @@ const AnimeDetailPage = () => {
       bannerImage: animeDetail.bannerImage,
       title: animeDetail.title,
     };
-
-    setAnimeCollections([collectionsObj, ...animeCollections]);
-    setAck(true);
   };
 
   const onHandleItemClick = (item) => {
@@ -77,7 +74,26 @@ const AnimeDetailPage = () => {
       bannerImage: animeDetail.bannerImage,
       title: animeDetail.title,
     };
-    localStorage.setItem(item, JSON.stringify(collectionsObj));
+
+    // NOTE: GET the collection and get the selectedAnimes Object
+    // NOTE: AND THEN write on localStorage after addition
+    let selectedCollection = JSON.parse(localStorage.getItem(item));
+    let populateCollection = selectedCollection.selectedAnimes;
+
+    let addNewAnimeToCollection = {
+      selectedAnimes: [...populateCollection, collectionsObj],
+    };
+
+    localStorage.setItem(item, JSON.stringify(addNewAnimeToCollection));
+
+    toast({
+      title: "Success.",
+      description: `Anime ${animeDetail?.title?.romaji} added to Collection`,
+      status: "success",
+      duration: 2000,
+      isClosable: true,
+    });
+    onClose();
   };
 
   useEffect(() => {

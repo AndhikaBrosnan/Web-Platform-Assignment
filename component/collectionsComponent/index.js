@@ -29,16 +29,6 @@ const CollectionsComponent = ({ onOpen, onHandleItemClick }) => {
         ANIME COLLECTIONS
       </Heading>
 
-      <Button
-        className={css`
-          margin-top: 2em;
-          margin-left: 3em;
-        `}
-        onClick={onOpen()}
-      >
-        Add a Collection
-      </Button>
-
       <div
         className={css`
           margin-top: 2em;
