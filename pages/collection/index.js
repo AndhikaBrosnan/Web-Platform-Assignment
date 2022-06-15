@@ -85,9 +85,12 @@ const CollectionList = () => {
     }
 
     if (router.query.id) {
-    }
-
-    if (!animeCollections.includes(collectionName)) {
+      setAnimeCollections([
+        ...animeCollections.filter((item) => item !== router.query.id),
+        collectionName,
+      ]);
+      localStorage.removeItem(router.query.id);
+    } else if (!animeCollections.includes(collectionName)) {
       setAnimeCollections([...animeCollections, collectionName]);
     }
     localStorage.setItem(collectionName, JSON.stringify(selectedAnime));
@@ -136,6 +139,9 @@ const CollectionList = () => {
               position: fixed;
               bottom: 2em;
               right: 2em;
+              @media (min-width: 768px) {
+                right: 37vw;
+              }
             `}
             colorScheme="blue"
             mr={3}
@@ -178,7 +184,9 @@ const CollectionList = () => {
               `}
             >
               You don't have anime collections yet. Add it{" "}
-              <Link href="/">here</Link>
+              <Link color="blue" href="/collection" onClick={onOpen}>
+                here
+              </Link>
             </div>
           )}
 
